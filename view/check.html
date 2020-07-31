@@ -1,0 +1,770 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/public.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.picker.css" />
+		<link rel="stylesheet" type="text/css" href="../css/mui.poppicker.css" />
+		<link rel="stylesheet" type="text/css" href="../css/icon.css" />
+		<link rel="stylesheet" href="../font/iconfont.css" />
+		<script type="text/javascript">
+			window.onload = window.onresize = function() {
+				document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.04 + 'px';
+			}
+		</script>
+		<style type="text/css">
+			body {
+				background: #FFFFFF;
+			}
+			
+			#check {
+				padding: 0.37rem 0.56rem;
+			}
+			
+			#check .head {
+				margin-bottom: 0.38rem;
+			}
+			
+			#check .head dl {
+				display: flex;
+			}
+			
+			#check .head dt {
+				background: red;
+				width: 0.6rem;
+				height: 0.6rem;
+				border-radius: 50%;
+				overflow: hidden;
+				font-size: 0;
+			}
+			
+			#check .head dt img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			#check .head dd {
+				font-size: 0;
+				margin-left: 0.13rem;
+				position: relative;
+			}
+			
+			#check .head dd p {
+				font-size: 0.16rem;
+				margin-bottom: 0.13rem;
+			}
+			
+			#check .head dd span.name {
+				font-size: 0.18rem;
+				font-weight: bold;
+			}
+			
+			#check .head dd span.state {
+				font-size: 0.12rem;
+				color: #FFFFFF;
+				background: #E51C23;
+				width: 0.6rem;
+				height: 0.2rem;
+				border-radius: 0.04rem;
+				position: absolute;
+				right: -0.6rem;
+				bottom: 13%;
+				text-align: center;
+				line-height: 0.2rem;
+			}
+			
+			#check .content {
+				display: flex;
+				padding-left: 0.04rem;
+			}
+			
+			#check .content .proress ul li {
+				width: 1.96rem;
+				margin-bottom: 0.2rem;
+			}
+			
+			#check .content .proress ul li .tishi {
+				margin-left: 0.42rem;
+				align-self: center;
+			}
+			
+			#check .content ul li .imgWrap {
+				width: 0.36rem;
+				height: 0.36rem;
+				font-size: 0;
+				border-radius: 50%;
+				overflow: hidden;
+				border: 1px solid #BBBBBB;
+			}
+			
+			#check .content ul li .imgWrap.active {
+				width: 0.36rem;
+				height: 0.36rem;
+				font-size: 0;
+				border-radius: 50%;
+				overflow: hidden;
+				border: 5px solid rgba(33, 150, 243, 1);
+			}
+			
+			#check .content ul li img {
+				width: 100%;
+			}
+			
+			#check .message dt {
+				width: 2.58rem;
+				height: 3.42rem;
+				font-size: 0;
+				
+			}
+			
+			#check .message dt img {
+				width: 100%;
+				min-height: 100%;
+			}
+			
+			#check .message li span {
+				font-size: 0.18rem;
+				line-height: 0.3rem;
+				margin-right: 0.23rem;
+				align-self: center;
+			}
+			
+			#check .message ul li .selectWrap {
+				position: relative;
+			}
+			
+			#check .message ul li .selectWrap .selectAddress {
+				font-size: 0.14rem;
+				margin: 0;
+			}
+			
+			#check .message ul li .selectWrap .selectIcon {
+				position: absolute;
+				right: 0;
+				top: 0;
+				bottom: 0;
+				margin: auto;
+				color: #BBBBBB;
+			}
+			
+			#check .message dd {
+				margin-left: 1rem;
+				
+			}
+			
+			#check .message dd li {
+				margin-bottom: 0.5rem;
+			}
+			
+			#check .message dd li input {
+				width: 2.4rem;
+				height: 0.4rem;
+				line-height: 0.4rem;
+				border: 1px solid #BBBBBB;
+				padding-left: 0.1rem;
+				border-radius: 0.04rem;
+				font-size: 0.14rem;
+				margin-bottom: 0;
+			}
+			
+			#check .message dd li .selectWrap {
+				width: 2.05rem;
+				height: 0.4rem;
+				line-height: 0.4rem;
+				border: 1px solid #BBBBBB;
+				padding-left: 0.1rem;
+				border-radius: 0.04rem;
+				margin-right: 0.1rem;
+				font-size: 0.14rem;
+				position: relative;
+			}
+			
+			#check .message dd li .selectWrap .selectMask {
+				background: #BBBBBB;
+				opacity: 0.5;
+				position: absolute;
+				width: 100%;
+				height: 100%;
+				left: 0;
+				top: 0;
+			}
+			
+			#check .message .linkIcon {
+				color: #BBBBBB;
+			}
+			
+			#check .message .linkIcon.active {
+				color: #5677fc;
+			}
+			
+			#check .type {
+				width: 100%;
+				height: 1rem;
+				border: 0.01rem solid #BBBBBB;
+				border-radius: 0.04rem;
+				padding: 0.12rem;
+				box-sizing: border-box;
+			}
+			
+			#check .type .typeList {
+				color: #101010;
+				background: #F0F2F5;
+				font-size: 0.16rem;
+				width: 1.2rem;
+				height: 0.3rem;
+				margin-left: 0.15rem;
+				line-height: 0.3rem;
+				padding-left: 0.1rem;
+			}
+			
+			#check .stateWrap {
+				padding-top: 0.38rem;
+				font-size: 0;
+				justify-content: flex-end;
+				padding-right: 0.1rem;
+			}
+			
+			#check .time {
+				width: 1.3rem;
+				font-size: 0.28rem;
+				color: #FF9800;
+			}
+			
+			#check .btn {
+				width: 1.2rem;
+				height: 0.4rem;
+				background: #2196F3;
+				text-align: center;
+				color: #FFFFFF;
+				border: none;
+				font-size: 0.14rem;
+				line-height: 0.4rem;
+				border-radius: 0.04rem;
+				margin-left: 0.35rem;
+				padding: 0;
+			}
+			
+			#check .content .NoProblems {
+				width: 100%;
+				padding-top: 1rem;
+				text-align: center;
+				font-size: 0.3rem;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div id="check">
+			<!--考生信息-->
+			<div class="head">
+				<dl>
+					<dt><img src="../img/head.jpg"/></dt>
+					<dd>
+						<p class="address" v-text="PoliceUnit"></p>
+						<span class="name" v-text="PoliceName"></span>
+						<span class="state" v-text="TaskAnswerState"></span>
+					</dd>
+				</dl>
+			</div>
+
+			<!--答题-->
+			<div class="content flex">
+				<!--考题进度-->
+				<div class="proress" v-show="!NoProblemsFlag">
+					<ul>
+						<li class="flex" v-for="(item,index) in wrongPerson">
+							<div :class="['imgWrap',item.state?'active':'']">
+								<img :src="window.apiurl+item.CriminalHead" />
+							</div>
+							<span class="iconfont tishi" style="color: #2196F3;" v-show="Progress==index">&#xe637;</span>
+						</li>
+
+					</ul>
+				</div>
+
+				<!--考题-->
+				<div class="message" v-show="!NoProblemsFlag">
+					<!--考题具体信息-->
+					<dl class="flex">
+						<dt><img :src="window.apiurl+wrongPerson[Progress].CriminalHead"/></dt>
+						<dd>
+							<ul>
+								<!---->
+								<li class="flex">
+									<span>姓名：</span>
+									<input type="text" placeholder="请输入姓名" v-model="sumbitData.CriminalName" />
+								</li>
+								<!---->
+								<li class="flex">
+									<span>籍贯：</span>
+									<input type="text" placeholder="请输入籍贯" v-model="sumbitData.adress" />
+								</li>
+								<li class="flex">
+									<span>罪名：</span>
+									<input type="text" placeholder="请输入罪名" v-model="sumbitData.ChargeTitle" />
+								</li>
+								<!---->
+								<li class="flex">
+									<span>原判刑期：</span>
+									<div class="selectWrap" @tap="showInToLongTimePick">
+										<span class="selectAddress" style="color: #959595;" v-show="!InToLongTimePick.name">请选择</span>
+										<span class="selectAddress" v-text="InToLongTimePick.name"></span>
+										<i class="linkIcon selectIcon">arrow_drop_down</i>
+									</div>
+								</li>
+								<!---->
+								<li class="flex">
+									<span>顽危情况：</span>
+									<div class="selectWrap" @tap="showRiskLevelPick">
+										 <span class="selectAddress"style="color: #959595;" v-show="!RiskLevelPick.name">请选择</span>
+										 <span class="selectAddress" v-text="RiskLevelPick.name"></span>
+										 <i class="linkIcon selectIcon">arrow_drop_down</i>
+									</div>
+								</li>
+							</ul>
+						</dd>
+					</dl>
+					<!--<div class="type flex">
+						<textarea name="" rows="" cols="" style="border: none;width: 100%;height: 100%;font-size: 0.14rem;" placeholder="请输入罪名" v-model="sumbitData.ChargeTitle"></textarea>
+					</div>-->
+					<!--抢劫罪 ； 诈骗罪-->
+
+					<!--时间   和下一步操作-->
+					<div class="stateWrap flex">
+						<div>
+							<span class="time"></span>
+						</div>
+						<button class="btn" @tap="jump('End.html')" v-text="nextBtn">下一题</button>
+					</div>
+				</div>
+				<!--未选题的提示-->
+				<div class="NoProblems" v-show="NoProblemsFlag" v-text="NoProblemsContent"></div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../api/req.js"></script>
+	<script type="text/javascript" src="../js/mui.js"></script>
+	<script type="text/javascript" src="../js/CountDown.js"></script>
+	<script type="text/javascript" src="../api/check.js"></script>
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<script type="text/javascript" src="../js/mui.picker.js"></script>
+	<script type="text/javascript" src="../js/mui.poppicker.js"></script>
+
+	<script type="text/javascript">
+		
+		var check = new Vue({
+			el: '#check',
+			data: {
+				Progress: 0,
+				wrongPerson: [{
+						CriminalHead: '../img/1.jpg',
+						IsSelect: 1,
+						state: 0
+					},
+					{
+						CriminalHead: '../img/1.jpg',
+						IsSelect: 1,
+						state: 0
+					},
+					{
+						CriminalHead: '../img/1.jpg',
+						IsSelect: 1,
+						state: 0
+					},
+					{
+						CriminalHead: '../img/1.jpg',
+						IsSelect: 1,
+						state: 0
+					},
+					{
+						CriminalHead: '../img/1.jpg',
+						IsSelect: 1,
+						state: 0
+					},
+					{
+						CriminalHead: '../img/1.jpg',
+						IsSelect: 1,
+						state: 0
+					},
+					{
+						CriminalHead: '../img/1.jpg',
+						IsSelect: 1,
+						state: 0
+					},
+					{
+						CriminalHead: '../img/1.jpg',
+						IsSelect: 1,
+						state: 0
+					},
+					{
+						CriminalHead: '../img/1.jpg',
+						IsSelect: 1,
+						state: 0
+					},
+					{
+						CriminalHead: '../img/1.jpg',
+						IsSelect: 1,
+						state: 0
+					}
+				],
+				sumbitData: {
+					CriminalName: '', //姓名
+					adress: '', //籍贯
+					CriminalPrisonTerm: '', //刑期
+					ChargeTitle: '', //罪名
+					DangerGrade: '' //顽危情况
+				},
+				InToLongTime: [{
+						text: '1年（含）以下',
+						value: '1年（含）以下'
+					},
+					{
+						text: '1-5年（含）',
+						value: '1-5年（含）'
+					},
+					{
+						text: '5-10年（含）',
+						value: '5-10年（含）'
+					},
+					{
+						text: '10年以上',
+						value: '10年以上'
+					},
+					{
+						text: '无期',
+						value: '无期'
+					},
+					{
+						text: '死缓',
+						value: '死缓'
+					}
+				],
+				InToLongTimePick: {
+					name: '',
+					id: null
+				},
+				RiskLevel: [
+				       {
+				       	text:"顽固犯+危险犯",
+				       	value:'3'},
+				       {
+						text: '顽固犯',
+						value: '1'
+					},
+					{
+						text: '危险犯',
+						value: '2'
+					},
+					{
+						text: '无',
+						value: '0'
+					}
+				],
+				RiskLevelPick: {
+					name: '',
+					id: null
+				},
+				PoliceCode: '', //编号
+				PoliceName: '', //名称
+				PoliceUnit: '', //单位
+				NoProblemsFlag: true,
+				taskid: '',
+				TaskAnswerState:'选题中', //答题状态内容的填充
+				nextBtn:'下一题',//按钮下一步到最后一题内容的变更
+				ScoreTotal:0,  //比赛总分
+				NoProblemsContent:'选题中...'
+			},
+			mounted: function() {
+				mui.init();
+				var that = this;
+				mui.plusReady(function() {
+
+				})
+				that.init();
+                that.getTaskState();
+                $('body').on('touchend',function(el){
+					if(el.tagName!='INPUT'||el.tagName!='TEXTAREA'){
+						$('input').blur();
+						$('textarea').blur();
+					}
+				})
+			},
+			methods: {
+				//处理页面键盘收回事件
+				
+				//获取任务状态
+				getTaskState:function(){
+					var that = this;
+					var params = {};
+					getTaskState({
+						data:params,
+						success:function(result){
+							var data = result[0];
+							if(that.taskid!= data.TaskId||that.NoProblemsFlag){//防止二次登录
+								that.taskid = data.TaskId//获取新任务的id
+								that.getProblems();
+							}
+							if(data.TaskState==1){//选题完毕
+								that.TaskAnswerState='选题完毕'
+								that.NoProblemsContent="选题完毕,等待主持人开始..."
+							}
+							//选中  和   开始
+							if(data.TaskState==2){
+								that.TaskAnswerState = '答题中';
+								that.TaskAnswersPolisInfo();
+								that.NoProblemsFlag = false;
+								that.fillTime(data);    //倒计时计算
+								
+							}else{
+								setTimeout(function(){
+									that.getTaskState();
+								},1000)
+							}
+                            							
+						},
+						error:function(){
+							
+						}
+					})
+				},
+				init: function() {
+					 this.PoliceCode =localStorage.getItem("PoliceCode");
+					 this.PoliceName = localStorage.getItem("PoliceName");
+					 this.PoliceUnit =localStorage.getItem("PoliceUnit"); 
+					 this.getRiskLevelPick();
+				     this.getInToLongTimePick();
+				},
+				jump: function(path) {
+					var that = this;
+					mui.confirm('确认提交并进入下一题', '提示', ['取消', '确定'], function(e) {
+						if(e.index == 1) {
+							that.askProblems(function() {
+								that.wrongPerson[that.Progress].state = 1;
+								
+								if(that.Progress == 8){
+									that.nextBtn = '提交'
+								}
+								if(that.Progress == 9) {
+									that.PoliceTaskFinish(path);
+								}else{
+									that.Progress += 1;
+								}
+								
+							})
+
+						}
+					}, 'div')
+                  
+				},
+				//填充危险犯
+				showRiskLevelPick: function() {
+					var that = this;
+					this.Picker.show(function(items) {
+						that.RiskLevelPick.name = items[0].text;
+						that.RiskLevelPick.id = items[0].value;
+					});
+				},
+				//获取是否危险犯		
+				getRiskLevelPick: function() {
+					this.Picker = new mui.PopPicker();
+					var arr = this.RiskLevel;
+					//mui 下拉框必须要写个value text 醉了 生成value text数组
+					this.Picker.setData(arr);
+				},
+				//填充刑期
+				showInToLongTimePick: function() {
+					var that = this;
+					this.Picker2.show(function(items) {
+						that.InToLongTimePick.name = items[0].text;
+						that.InToLongTimePick.id = items[0].value;
+					});
+				},
+				//获取刑期	
+				getInToLongTimePick: function() {
+					this.Picker2 = new mui.PopPicker();
+					var arr = this.InToLongTime;
+					//mui 下拉框必须要写个value text 醉了 生成value text数组
+					this.Picker2.setData(arr);
+				},
+				//填充倒计时
+				fillTime: function(data) {
+					var that = this;
+					var _TaskEnd = new Date(data.TaskEnd.replace(/-/g,"/")).getTime();
+//					var _TaskBegin = new Date(data.TaskBegin.replace(/-/g,"/")).getTime();
+//					var  NowTime = new Date().getTime();
+//					var  _TaskBegin = NowTime-_TaskBegin<0?_TaskBegin:NowTime;
+//					var time = _TaskEnd - _TaskBegin;				
+					countDown(_TaskEnd, $('.time'),function(){
+//						that.PoliceTaskFinish('End.html')
+					})
+				},
+				//获取答题数据
+				getProblems: function() {
+					var that = this;
+					var params = {
+						taskid: this.taskid,
+						policecode: this.PoliceCode
+					}
+					getProblems({
+						data: params,
+						success: function(data) {
+							var CriminalList=data[0].CriminalList;							          
+						        that.wrongPerson = CriminalList;	
+						},
+						error: function() {
+							//				    		that.getProblems();
+
+						}
+					})
+				},
+				//狱警答题内容写入
+				askProblems: function(fn) {
+					var that = this;
+					var params = {
+						taskid: this.taskid,
+						policecode: this.PoliceCode,
+					}
+					this.getScore(params);
+					askProblems({
+						data: params,
+						success: function(data) {
+							that.sumbitData.CriminalName="";
+							that.sumbitData.adress="";
+							that.InToLongTimePick.name="";
+							that.RiskLevelPick.name="";
+							that.sumbitData.ChargeTitle="";
+							fn()
+						},
+						error: function() {
+
+						}
+					})
+
+				},
+
+				//验证答题分数  并计算出得分
+				getScore: function(params) {
+					var that = this;
+					var Criminal = that.wrongPerson[this.Progress];
+					var CriminalId = that.wrongPerson[this.Progress].CriminalId;//罪犯的id
+					var arr = [];
+					    arr[0]={
+					    	Criminal:CriminalId,//罪犯的id
+						    Answer:$.trim(that.sumbitData.CriminalName), //答题内容（姓名）
+						    IsTrue:$.trim(that.sumbitData.CriminalName)==Criminal.CriminalName?1:0, //正确与否
+						    Score:$.trim(that.sumbitData.CriminalName)==Criminal.CriminalName?2:0,//得分
+						    IsSeq:1
+					     }
+					     arr[1]={
+					    	Criminal:CriminalId,//罪犯的id
+						    Answer:$.trim(that.sumbitData.adress), //答题内容（籍贯）
+						    IsTrue:$.trim(that.sumbitData.adress)== Criminal.CriminalProvinces+Criminal.CriminalCities+Criminal.CriminalCounties?1:0, //正确与否
+						    Score:$.trim(that.sumbitData.adress)== Criminal.CriminalProvinces+Criminal.CriminalCities+Criminal.CriminalCounties?2:0, //得分
+						    IsSeq:2
+					     }
+					      arr[2]={
+					    	Criminal:CriminalId,//罪犯的id
+						    Answer:that.InToLongTimePick.name, //答题内容（）
+						    IsTrue:that.InToLongTimePick.name==Criminal.CriminalPrisonTerm?1:0, //正确与否
+						    Score:that.InToLongTimePick.name==Criminal.CriminalPrisonTerm?2:0, //得分
+						    IsSeq:3
+					     }
+					       arr[3]={
+					    	Criminal:CriminalId,//罪犯的id
+						    Answer:that.RiskLevelPick.name, //答题内容（）
+						    IsTrue:that.RiskLevelPick.name==Criminal.DangerGrade?1:0, //正确与否
+						    Score:that.RiskLevelPick.name==Criminal.DangerGrade?2:0, //得分
+						     IsSeq:4
+					     }
+					      arr[4]={
+					    	Criminal:CriminalId,//罪犯的id
+						    Answer:$.trim(that.sumbitData.ChargeTitle), //答题内容（罪名）
+						    IsTrue:$.trim(that.sumbitData.ChargeTitle)?1:0, //正确与否
+						    Score:$.trim(that.sumbitData.ChargeTitle)?2:0, //得分
+						    IsSeq:5
+					     }  
+					     //增加总分
+					var num = 0
+					    for(var i=0;i<arr.length;i++){
+					    	num +=arr[i].Score;
+					    }
+					that.ScoreTotal+=num;
+					localStorage.setItem('ScoreTotal',that.ScoreTotal);
+					params.answerlist=JSON.stringify(arr);
+					return params;
+
+				},
+				//跳转到结束页面
+				jumpEndPage:function(path){
+					mui.openWindow({
+						url: path,
+						id: path,
+						createNew: true,
+						styles:{
+						  cachemode:"noCache"
+						 }
+					})
+				},
+				//狱警自发结束问答
+				PoliceTaskFinish:function(path){
+					var that = this;
+					var params= {
+						taskid: this.taskid,
+						PoliceCode:this.PoliceCode
+					};
+					PoliceTaskFinish({
+						data:params,
+						success:function(data){
+							console.log(data+'狱警自发结束问答');
+							that.jumpEndPage(path);
+						},
+						error:function(){
+							
+						}
+					})
+				},
+               // 大屏幕展示：狱警答题情况
+                TaskAnswersPolisInfo:function(){
+                	var that = this;
+               	   var params={
+               	   	    taskid:this.taskid  
+               	     }
+               	   TaskAnswersPolisInfo({
+               	   	   data:params,
+               	   	   success:function(data){
+               	   	   	  var indexS=0;
+               	   	   	  var Score_1=0;
+               	   	   	  for(var j=0;j<data.length;j++){
+               	   	   	  	  if(data[j].PoliceCode==that.PoliceCode){
+               	   	   	  	  	 var list = data[j].CriminalList;
+               	   	   	         for(var i=0;i<list.length;i++){
+               	   	   	      	      if(list[i]['IsAnswer']){
+               	   	   	      	     	that.wrongPerson[i].state = 1;
+               	   	   	      	    	indexS+=1;
+               	   	   	      	  	    Score_1+=list[i].Score;
+               	   	   	      	     }
+               	   	   	         }
+               	   	   	  	  } 
+               	   	   	     } 
+               	   	   	    that.Progress = indexS;  //获取答题顺序
+               	   	   	    that.ScoreTotal = Score_1;  //获取答题结果
+               	   	   	    localStorage.setItem('ScoreTotal',that.ScoreTotal);
+               	   	   	    if(indexS==10){
+               	   	   	    	that.jumpEndPage('End.html');
+               	   	   	    }
+               	   	   },
+               	   	   error:function(){
+               	   	   	  
+               	   	   }
+               	   })
+                }
+			}
+		})
+	</script>
+
+</html>

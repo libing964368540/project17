@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<link rel="stylesheet" type="text/css" href="../css/public.css" />
+		<link rel="stylesheet" href="../font/iconfont.css" />
+		<script type="text/javascript">
+			window.onload = window.onresize = function() {
+				document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.04 + 'px';
+			}
+		</script>
+	</head>
+	<style type="text/css">
+			body{
+				background: #FFFFFF;
+			}
+			#End {
+				padding: 0.37rem 0.56rem;
+			}
+			#End .head{
+				margin-bottom: 0.58rem;
+			}
+			#End .head dl {
+				display: flex;
+			}
+			
+			#End .head dt {
+				background: red;
+				width: 0.6rem;
+				height: 0.6rem;
+				border-radius: 50%;
+				overflow: hidden;
+				font-size: 0;
+			}
+			
+			#End .head dt img {
+				width: 100%;
+				height: 100%;
+			}
+			
+			#End .head dd {
+				font-size: 0;
+				margin-left: 0.13rem;
+				position: relative;
+			}
+			
+			#End .head dd p {
+				font-size: 0.16rem;
+				margin-bottom: 0.13rem;
+			}
+			
+			#End .head dd span.name {
+				font-size: 0.18rem;
+				font-weight: bold;
+			}
+			#End .head dd span.state {
+				font-size: 0.12rem;
+				color: #FFFFFF;
+				background:#FF9800;
+				width: 0.6rem;
+				height: 0.2rem;
+				border-radius: 0.04rem;
+				position: absolute;
+				right: -0.5rem;
+				bottom: 5%;
+				text-align: center;
+				line-height: 0.2rem;
+			}
+			#End .ScoreWrap{
+				width: 90%;
+				height: 0.72rem;
+				position: absolute;
+				top:0;
+				bottom: 0;
+				margin: auto;
+				justify-content: center;
+			}
+			#End .ScoreWrap .ScoreTitle{
+				font-size: 0.48rem;
+				color: #101010;
+			}
+			#End .ScoreWrap .Score{
+					font-size: 0.48rem;
+				   color: #E51C23;
+			}
+			.btn{
+				width: 1.2rem;
+				height: 0.4rem;
+				background: #2196F3;
+				text-align: center;
+				color: #FFFFFF;
+				border: none;
+				font-size: 0.14rem;
+				line-height: 0.4rem;
+				border-radius: 0.04rem;
+				margin-left: 0.35rem;
+				padding: 0;
+			}
+			.btnWrap{
+				width: 100%;
+				text-align: center;
+				position: absolute;
+				left: 0;
+				bottom: 1rem;
+				
+			}
+	</style>
+	<body>
+		<div id="End">
+			  <!--头部-->
+			  <div class="head">
+				<dl>
+					<dt><img src="../img/head.jpg"/></dt>
+					<dd>
+						<p class="address" v-text="PoliceUnit"></p>
+						<span class="name" v-text="PoliceName"></span>
+						<span class="state">答题结束</span>
+					</dd>
+				</dl>
+			</div>
+			  <!--得分-->
+			  <div class="ScoreWrap flex">
+			  	   <span class="ScoreTitle">总成绩：</span>
+			  	   <span class="Score" v-text="Score"></span>
+			  </div>
+			  <!--结束按钮-->
+			  <div class="btnWrap">
+			  	   <button class="btn" @tap="jump('../index.html')">结束（10s）</button>
+			  </div>
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../api/req.js"></script>
+	<script type="text/javascript" src="../js/mui.js"></script>
+	<script type="text/javascript" src="../js/CountDown.js"></script>
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<script type="text/javascript">
+		var End = new Vue({
+			el:'#End',
+			data:{
+				Score:0,
+				PoliceName:'',
+				PoliceUnit:''
+				
+			},
+			mounted: function() {
+				mui.init();
+				mui.plusReady(function() {
+
+				})
+				this.init();
+				this.DownEnd()
+			},
+			methods:{
+				//初始化
+				init:function(){
+					this.Score=localStorage.getItem('ScoreTotal');
+					this.PoliceName=localStorage.getItem("PoliceName");
+					this.PoliceUnit=localStorage.getItem("PoliceUnit");
+				},
+				//倒计时
+				DownEnd:function(){
+					var that = this;
+					DownEnd($('.btn'),function(){
+						that.jump('../index.html')
+					})
+				},
+				//跳转
+				jump:function(path){
+					localStorage.removeItem('ScoreTotal');
+					 localStorage.removeItem("PoliceCode");
+                     localStorage.removeItem("PoliceName");
+                     localStorage.removeItem("PoliceUnit");
+					mui.openWindow({
+						url: path,
+						id: path,
+						createNew: true,
+						styles:{
+						  cachemode:"cacheOnly"
+						 }
+					})
+				}
+			}
+		})
+	</script>
+</html>

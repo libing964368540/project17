@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="js/mui.min.js"></script>
+		<!--<link href="css/mui.min.css" rel="stylesheet" />-->
+		<link rel="stylesheet" type="text/css" href="css/public.css" />
+		<script type="text/javascript" charset="utf-8">
+			mui.init();
+			window.onload = window.onresize = function() {
+				document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.04 + 'px';
+			}
+		</script>
+	</head>
+	<style type="text/css">
+		#login {
+			font-size: 0;
+			width: 5.16rem;
+			background: #FFFFFF;
+			height: 3.77rem;
+			position: absolute;
+			left: 0;
+			right: 0;
+			top: 0;
+			bottom: 0;
+			margin: auto;
+			padding: 0.44rem 1.08rem;
+			box-sizing: border-box;
+			border-radius: 0.04rem;
+		}
+		
+		#login h3 {
+			font-size: 0.28rem;
+		}
+		
+		#login .title {
+			padding-top: 0.54rem;
+			font-size: 0.16rem;
+			color: #101010;
+			margin-bottom: 0.1rem;
+		}
+		
+		#login input {
+			;
+			background: #f3f5f8;
+			border: none;
+			width: 3rem;
+			height: 0.4rem;
+			line-height: 0.4rem;
+			margin-bottom: 0.6rem;
+			padding-left: 0.1rem;
+			outline: none;
+		}
+		
+		#login button {
+			background: #2196f3;
+			color: #FFFFFF;
+			border: none;
+			width: 1rem;
+			border-radius: 0.04rem;
+			line-height: 0.3rem;
+			outline: none;
+		}
+	</style>
+
+	<body>
+		<div id="login">
+			<h3>无册点名竞赛系统</h3>
+			<p class="title">警员编号：</p>
+			<div>
+				<input type="text" placeholder="请输入警员编号" v-model="PoliceCode" />
+
+			</div>
+
+			<button @tap="jump('view/user.html')">登录</button>
+		</div>
+	</body>
+	<script type="text/javascript" src="js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="js/vue.js"></script>
+	<script type="text/javascript" src="api/req.js"></script>
+	<script type="text/javascript" src="api/check.js"></script>
+	<script type="text/javascript" src="api/login.js"></script>
+	<script type="text/javascript">
+		var login = new Vue({
+			el: '#login',
+			data: {
+				PoliceCode: ''
+			},
+			mounted: function() {
+				mui.plusReady(function() {
+
+				})
+				$('body').on('touchend', function(el) {
+					if(el.tagName != 'INPUT') {
+						$('input').blur();
+					}
+				})
+			},
+			methods: {
+				jump: function(path) {
+					if(!this.PoliceCode) {
+						new fui({
+							text: '请输入警号',
+							bg: '#FF3939'
+						})
+						return;
+					}
+					var params = {
+						PoliceCode: this.PoliceCode
+					}
+					SeeInfo({
+						data: params,
+						success: function(data) {
+							var obj = data[0];
+							//存储数据
+							localStorage.setItem('PoliceCode', obj.PoliceCode) //警号
+							localStorage.setItem('PoliceName', obj.PoliceName) //姓名
+							localStorage.setItem('PoliceUnit', obj.PoliceUnit) //单位
+
+							mui.openWindow({
+								url: path,
+								id: path,
+								createNew: true,
+								styles: {
+									cachemode: "noCache"
+								}
+							})
+						},
+						error: function() {
+
+						}
+					})
+                   
+                   
+				}
+
+			}
+		})
+	</script>
+
+</html>

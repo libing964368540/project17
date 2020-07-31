@@ -1,0 +1,28 @@
+* {
+	padding: 0;
+	margin: 0;
+	list-style: none;
+	text-decoration: none;
+}
+
+body {
+	background: #e1e1e1;
+}
+.flex{
+	display: flex;
+}
+.fui-alert {
+	width: 100%!important;
+	height: 60px;
+	background: #d00000;
+	position: absolute;
+	top: -60px;
+	left: 0;
+	transition: all .5s;
+	-webkit-transition: all .5s;
+	color: #ffffff;
+	text-align: center;
+	line-height: 60px;
+	z-index: 9999999;
+	box-shadow: 2px 2px 7px -2px #FF4747;
+}

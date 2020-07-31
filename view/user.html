@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+		<title></title>
+		<script src="../js/mui.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="../css/public.css"/>
+		<script type="text/javascript">
+			
+			window.onload = window.onresize = function() {
+				document.documentElement.style.fontSize = document.documentElement.clientWidth / 10.04 + 'px';
+			}
+		</script>
+	</head>
+	 <style type="text/css">
+	 	#user{
+	 		background: #FFFFFF;
+	 		width: 5.16rem;
+	 		height: 4.5rem;
+	 		position: absolute;
+	 		left: 0;
+	 		right: 0;
+	 		top:0;
+	 		bottom: 0;
+	 		margin: auto;
+	 		padding: 0.44rem 1.08rem;
+			box-sizing: border-box;
+			border-radius:0.04rem ;
+	 	}
+	 	#user h3 {
+			font-size: 0.28rem;
+		}
+		#user .title {
+			padding-top: 0.54rem;
+			font-size: 0.16rem;
+			color: #101010;
+			margin-bottom:0.1rem ;
+		}
+		#user .Number{
+			color: #101010;
+			font-size: 0.16rem;
+		}
+		#user dl{
+			margin-top: 0.5rem;
+			display: flex;
+		}
+		#user dt{
+			width: 0.6rem;
+			height: 0.6rem;
+			font-size: 0;
+			margin-right: 0.13rem;
+		}
+		#user dt img{
+			width: 100%;
+			min-height:100% ;
+		}
+		#user dl dd{
+			font-size: 0.16rem;
+			}
+		#user .address{
+			font-size: 0.14rem;	
+			margin-bottom: 0.1rem;
+			}
+		#user .name{
+			font-size: 0.16rem;	
+			}
+		#user button{
+			background: #2196f3;
+			color: #FFFFFF;
+			border: none;
+			width: 1rem;
+			border-radius: 0.04rem;
+			line-height: 0.3rem;
+			font-size: 0.16rem;	
+			}			
+	 </style>
+	<body>
+		<div id="user">
+			<h3>无册点名竞赛系统</h3>
+			<p class="title">警员编号：</p>
+			<p class="Number" v-text="PoliceCode"></p>
+			<dl>
+				<dt><img src="../img/head.jpg"/></dt>
+				<dd>
+					<p class="address" v-text="PoliceUnit"></p>
+					<span class="name" v-text="PoliceName"></span>
+				</dd>
+			</dl>
+			<div>
+				<button @tap="login('./check.html')">登录</button>
+				<button style="background: #FF9800" @tap="jump('../index.html')">重新输入</button>
+			</div>
+			
+		</div>
+	</body>
+	<script type="text/javascript" src="../js/jquery-1.12.4.min.js"></script>
+	<script type="text/javascript" src="../js/vue.js"></script>
+	<script type="text/javascript" src="../api/req.js"></script>
+	<script type="text/javascript" src="../api/user.js"></script>
+	<script type="text/javascript">
+			
+		var loginS = new Vue({
+			el: '#user',
+			data: {
+               PoliceCode:'',
+               PoliceName:'',
+               PoliceUnit:''
+			},
+			mounted:function(){
+				mui.init();
+				
+				var that = this;
+				that.dataInit();
+					
+			},
+			methods: {
+				//数据初始化
+				dataInit:function(){
+					var that = this;
+					mui.plusReady(function() {
+						that.PoliceCode = localStorage.getItem("PoliceCode");
+                        that.PoliceName = localStorage.getItem("PoliceName");
+                        that.PoliceUnit = localStorage.getItem("PoliceUnit");  
+					})
+				},
+				login:function(path){
+					var params = {
+						policecode:this.PoliceCode,
+						deviceid:2   //设备id
+					}
+					login({
+						data:params,
+						success:function(data){
+							mui.openWindow({
+						       url: path,
+						       id: path,
+						       createNew: true,
+						       styles:{
+							       cachemode:"noCache"
+						       }
+					        })
+						},
+						error:function(){
+						 
+						}
+					})
+                   
+				},
+				jump: function(path) {
+					 localStorage.removeItem("PoliceCode");
+                     localStorage.removeItem("PoliceName");
+                     localStorage.removeItem("PoliceUnit");
+					mui.openWindow({
+						url: path,
+						id: path,
+						createNew: true,
+						styles:{
+							cachemode:"cacheOnly"
+						}
+					})
+				}
+			}
+		})
+	</script>
+</html>
